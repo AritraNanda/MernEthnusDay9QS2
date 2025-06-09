@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Personal Details Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="personalForm" onsubmit="return validateForm()">
+    <h2>Personal Information</h2>
+
+    <label for="name">Full Name</label>
+    <input type="text" id="name">
+    <div id="nameError" class="error"></div>
+
+    <label for="phone">Phone Number</label>
+    <input type="text" id="phone" placeholder="10 digits only">
+    <div id="phoneError" class="error"></div>
+
+    <label for="email">Email Address</label>
+    <input type="text" id="email">
+    <div id="emailError" class="error"></div>
+
+    <label for="address">Address</label>
+    <input type="text" id="address">
+    <div id="addressError" class="error"></div>
+
+    <label for="city">City</label>
+    <input type="text" id="city">
+    <div id="cityError" class="error"></div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function validateForm() {
+      let isValid = true;
+
+      // Clear all previous errors
+      document.querySelectorAll('.error').forEach(el => el.textContent = '');
+
+      // Get values
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const city = document.getElementById('city').value.trim();
+
+      // Name validation
+      if (name === "") {
+        document.getElementById('nameError').textContent = "This field is required.";
+        isValid = false;
+      }
+
+      // Phone validation
+      if (phone === "") {
+        document.getElementById('phoneError').textContent = "This field is required.";
+        isValid = false;
+      } else if (!/^\d{10}$/.test(phone)) {
+        document.getElementById('phoneError').textContent = "Enter a valid 10-digit phone number.";
+        isValid = false;
+      }
+
+      // Email validation
+      if (email === "") {
+        document.getElementById('emailError').textContent = "This field is required.";
+        isValid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('emailError').textContent = "Enter a valid email address.";
+        isValid = false;
+      }
+
+      // Address validation
+      if (address === "") {
+        document.getElementById('addressError').textContent = "This field is required.";
+        isValid = false;
+      }
+
+      // City validation
+      if (city === "") {
+        document.getElementById('cityError').textContent = "This field is required.";
+        isValid = false;
+      }
+
+      return isValid;
+    }
+  </script>
+
+</body>
+</html>
